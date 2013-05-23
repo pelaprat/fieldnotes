@@ -9,7 +9,7 @@
 ##
 
 ## Make sure we point correctly
-BEGIN { push @INC, 
+BEGIN { push @INC, '../LCHC'; }
 
 use strict;
 use CGI;
@@ -25,7 +25,7 @@ my $lchc   = new LCHC::Notes;
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user = $cgi->cookie($lchc->{cookieName});
+my $user = $cgi->cookie($lchc->{cookie_name_reg});
 my $conference = $cgi->param('conference');
 my $fieldnote  = $cgi->param('fieldnote');
 my $type       = $cgi->param('type');

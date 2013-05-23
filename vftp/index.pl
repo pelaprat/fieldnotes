@@ -9,7 +9,7 @@
 ##
 
 ## Make sure we point correctly
-BEGIN { push @INC, '/Users/web/perl'; }
+BEGIN { push @INC, '../LCHC'; }
 
 use strict;
 use CGI;
@@ -25,7 +25,7 @@ my $db   = new LCHC::SQL::Vftp;
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user = $cgi->cookie($vftp->{cookieName});
+my $user = $cgi->cookie($vftp->{cookie_name_reg});
 
 ## Check parameter values
 $user = -1 if ! defined $user;

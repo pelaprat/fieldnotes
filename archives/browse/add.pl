@@ -9,7 +9,7 @@
 ##
 
 ## Make sure we point correctly
-BEGIN { push @INC, '/Users/web/perl'; }
+BEGIN { push @INC, '../../LCHC'; }
 
 use strict;
 use CGI;
@@ -19,13 +19,13 @@ use LCHC::Notes;
 ## Build the basic objects
 my $cgi  = new CGI;
 my $db   = new LCHC::SQL::Notes;
-my $lchc = new LCHC::Notes( 'http://fieldnotes.ucsd.edu/archives' );
+my $lchc = new LCHC::Notes( 'archives' );
 
 ## Restore parameters
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user = $cgi->cookie('lchcarchives');
+my $user = $cgi->cookie($lchc->{cookie_name_arc});
 my $conference = $cgi->param('conference');
 my $fieldnote  = $cgi->param('fieldnote');
 my $type       = $cgi->param('type');

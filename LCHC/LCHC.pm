@@ -18,16 +18,12 @@ sub new {
     my $proto = shift;
     my $class = ref($proto) || $proto;
 
-    my $root = shift;
-    if( ! defined $root ) {
-	$root = 'http://fieldnotes.ucsd.edu';
-    }
-
     my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
 	localtime(time);
 
+    my $option = shift @_;
+
     my $self = {
-	cookieName        => 'lchcuser',
 
 	dir_backup        => '/Users/lchc/backup',
 	dir_backup_db     => '/Users/lchc/backup/databases/fieldnote',
@@ -36,7 +32,14 @@ sub new {
         home_directory    => '/Users/lchc',
         pacakge_directory => '/Users/lchc',
 
-        uri_root          => $root,
+        uri_domain        => 'lchc-test-2.ucsd.edu',
+
+        uri_root          => 'http://lchc-test-2.ucsd.edu',
+        archives_root     => 'http://lchc-test-2.ucsd.edu/archives',
+
+        cookie_domain     => '.lchc-test-2.ucsd.edu',
+	cookie_name_reg   => 'lchcuser',
+        cookie_name_arc   => 'lchcarchives',
 
         user_admin        => 0,
 	user_name         => 'no name',
@@ -51,6 +54,13 @@ sub new {
         _year_interval    => 3
 
     };
+
+    ## Set the working uri_root
+    if( defined $option && $option eq 'archives' ) {
+      $self->{working_uri_root} = $self->{archives_root};
+    } else {
+      $self->{working_uri_root} = $self->{uri_root};
+    }
 
     $self->{_year_base} = $self->{_year_current} - $self->{_year_interval} + 1;
 
@@ -258,7 +268,7 @@ sub year_menu($$$) {
     my %labels = ();
 
     my @values = (1989 .. $now);
-    if( $menuOptions->{_year_base} == 1 ) {
+    if( defined $menuOptions->{_year_base} && $menuOptions->{_year_base} == 1 ) {
 	@values = ( $self->{_year_base} .. $now );
     }
 

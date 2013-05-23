@@ -47,7 +47,7 @@ my $cookie;
 $user = $vftp->login($user, $pass);
 
 if($user >= 1) {
-    $cookie = $cgi->cookie(-name    => $lchc->{cookieName},
+    $cookie = $cgi->cookie(-name    => $lchc->{cookie_name_reg},
 			   -value   => $user,
 			   -expires => '+1y',
 			   -path    => '/',

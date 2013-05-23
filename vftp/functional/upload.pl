@@ -26,7 +26,7 @@ my $db   = new LCHC::SQL::Vftp;
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user  = $cgi->cookie($vftp->{cookieName});
+my $user  = $cgi->cookie($vftp->{cookie_name_reg});
 my $space = $cgi->param('space');
 my $name  = $cgi->param('file');
 my $data  = $cgi->upload('file');

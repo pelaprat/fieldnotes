@@ -9,7 +9,7 @@
 ##
 
 ## Make sure we point correctly
-BEGIN { push @INC, '/Users/web/perl'; }
+BEGIN { push @INC, '../../LCHC'; }
 
 use strict;
 use CGI;
@@ -19,7 +19,7 @@ use LCHC::Notes;
 ## Build the basic objects
 my $cgi  = new CGI;
 my $db   = new LCHC::SQL::Notes;
-my $lchc = new LCHC::Notes( 'http://fieldnotes.ucsd.edu/archives' );
+my $lchc = new LCHC::Notes( 'archives' );
 
 ## Restore parameters
 $cgi->restore_parameters();
@@ -47,12 +47,12 @@ my $cookie;
 $user = $lchc->login($user, $pass);
 
 if($user >= 1) {
-    print "<br>good<br>";
-    $cookie = $cgi->cookie(-name    => 'lchcarchives',
+
+    $cookie = $cgi->cookie(-name    => $lchc->{cookie_name_arc},
 			   -value   => $user,
 			   -expires => '+1y',
 			   -path    => '/',
-			   -domain  => '.fieldnotes.ucsd.edu',
+			   -domain  => $lchc->{cookie_domain},
 			   -secure  => 0);
 } else {
     $cookie = '';

@@ -25,7 +25,7 @@ my $db   = new LCHC::SQL::Vftp;
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user = $cgi->cookie($vftp->{cookieName});
+my $user = $cgi->cookie($vftp->{cookie_name_reg});
 
 ## Check parameter values
 $user = -1 if ! defined $user;
@@ -38,7 +38,7 @@ $db->set_pn($vftp);
 
 
 ## Try logging in the user
-my $cookie = $cgi->cookie(-name    => $lchc->{cookieName},
+my $cookie = $cgi->cookie(-name    => $lchc->{cookie_name_reg},
 			  -value   => -1,
 			  -expires => '-1d',
 			  -path    => '/',

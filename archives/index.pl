@@ -9,7 +9,7 @@
 ##
 
 ## Make sure we point correctly
-BEGIN { push @INC, '/Users/web/perl'; }
+BEGIN { push @INC, '../LCHC'; }
 
 use strict;
 use CGI;
@@ -19,14 +19,14 @@ use LCHC::SQL::Notes;
 ## Build the basic objects
 my $cgi  = new CGI;
 my $db   = new LCHC::SQL::Notes;
-my $lchc = new LCHC::Notes( 'http://fieldnotes.ucsd.edu/archives' );
+my $lchc = new LCHC::Notes( 'archives' );
 
 
 ## Restore parameters
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user = $cgi->cookie('lchcarchives');
+my $user = $cgi->cookie($lchc->{cookie_name_arc});
 
 ## Check parameter values
 $user = -1 if ! defined $user;
@@ -89,7 +89,7 @@ if($user <= 0) {
     print $cgi->span({-class=>'header', -style=>'padding-left: 5px'}, 'Archive Database');
     print $cgi->br;
     print $cgi->span({ -style => 'font-size: 12px; font-weight: bold; color: red' },
-		     $cgi->a({ -href => 'http://fieldnotes.ucsd.edu/index.pl' }, 'Regular Fieldnotes Database' ));
+		     $cgi->a({ -href => $lchc->{uri_root} }, 'Regular Fieldnotes Database' ));
     print $cgi->hr({-size=>1});
     print $cgi->p;
 

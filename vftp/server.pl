@@ -9,7 +9,7 @@
 ##
 
 ## Make sure we point correctly
-BEGIN { push @INC, '/Users/web/perl'; }
+BEGIN { push @INC, '../LCHC'; }
 
 use strict;
 use CGI;

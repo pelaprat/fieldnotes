@@ -27,7 +27,7 @@ my $lchc = new LCHC::Notes;
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user = $cgi->cookie($lchc->{cookieName});
+my $user = $cgi->cookie($lchc->{cookie_name_reg});
 my $what = $cgi->param('what');
 
 my $person  = $cgi->param('person');

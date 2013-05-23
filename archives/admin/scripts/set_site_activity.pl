@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl -w
+#!/usr/bin/perl -w
 
 ####
 ## Fieldnotes Database
@@ -19,7 +19,7 @@ use LCHC::SQL::Notes;
 
 ## Build the basic objects
 my $db   = new LCHC::SQL::Notes;
-my $lchc = new LCHC::Notes;
+my $lchc = new LCHC::Notes( 'archives' );
 
 ## Set some variables
 $lchc->set_db($db);

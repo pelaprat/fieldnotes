@@ -31,7 +31,7 @@ my $lchc   = new LCHC::Notes;
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user = $cgi->cookie($lchc->{cookieName});
+my $user = $cgi->cookie($lchc->{cookie_name_reg});
 my $course     = $cgi->param('course');
 my $conference = $cgi->param('conference');
 my $keywords   = $cgi->param('keywords');

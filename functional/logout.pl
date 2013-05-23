@@ -25,7 +25,7 @@ my $lchc = new LCHC::Notes;
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user = $cgi->cookie($lchc->{cookieName});
+my $user = $cgi->cookie($lchc->{cookie_name_reg});
 
 ## Check parameter values
 $user = -1 if ! defined $user;
@@ -43,11 +43,11 @@ $lchc->log_user_activity( $user, { url    => 'functional/logout.pl',
 				   action => 'logout' });
 
 ## Try logging in the user
-my $cookie = $cgi->cookie(-name    => $lchc->{cookieName},
+my $cookie = $cgi->cookie(-name    => $lchc->{cookie_name_reg},
 			  -value   => -1,
 			  -expires => '-1d',
 			  -path    => '/',
-			  -domain  => '.fieldnotes.ucsd.edu',
+			  -domain  => $lchc->{cookie_domain},
 			  -secure  => 0);
 
 print $cgi->redirect({-location=>$lchc->{uri_index}, -cookie=>$cookie});

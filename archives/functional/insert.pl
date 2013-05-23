@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl -w
+#!/usr/bin/perl -w
 
 ####
 ## Fieldnotes Database
@@ -9,7 +9,7 @@
 ##
 
 ## Make sure we point correctly
-BEGIN { push @INC, '/Users/web/perl'; }
+BEGIN { push @INC, '../../LCHC'; }
 
 use strict;
 use CGI;
@@ -30,7 +30,7 @@ my $lchc = new LCHC::Notes( 'http://archives.lchc-resources.org' );
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user       = $cgi->cookie('lchcarchives');
+my $user       = $cgi->cookie($lchc->{cookie_name_arc});
 my $type       = $cgi->param('type');
 my $course     = $cgi->param('course');
 my $conference = $cgi->param('conference');

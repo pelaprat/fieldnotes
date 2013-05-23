@@ -25,17 +25,17 @@ sub new {
 
     $self->{admin_index}  = $self->{admin_root} . '/index.pl';
 
-    $self->{uri_css}      = $self->{uri_root} . '/display/lchc.css';
-    $self->{uri_index}    = $self->{uri_root} . '/index.pl';
-    $self->{uri_login}    = $self->{uri_root} . 'functional/login.pl';
-    $self->{uri_logout}   = $self->{uri_root} . '/functional/logout.pl';
+    $self->{uri_css}      = $self->{working_uri_root} . '/display/lchc.css';
+    $self->{uri_index}    = $self->{working_uri_root} . '/index.pl';
+    $self->{uri_login}    = $self->{working_uri_root} . 'functional/login.pl';
+    $self->{uri_logout}   = $self->{working_uri_root} . '/functional/logout.pl';
 
-    $self->{uri_browse}   = $self->{uri_root} . '/vftp/browse.pl';
-    $self->{uri_create}   = $self->{uri_root} . '/vftp/functional/create.pl';
-    $self->{uri_download} = $self->{uri_root} . '/vftp/functional/download.pl';
-    $self->{uri_images}   = $self->{uri_root} . '/vftp/images';
-    $self->{uri_jump}     = $self->{uri_root} . '/vftp/functional/jump.pl';
-    $self->{uri_upload}   = $self->{uri_root} . '/vftp/functional/upload.pl';
+    $self->{uri_browse}   = $self->{working_uri_root} . '/vftp/browse.pl';
+    $self->{uri_create}   = $self->{working_uri_root} . '/vftp/functional/create.pl';
+    $self->{uri_download} = $self->{working_uri_root} . '/vftp/functional/download.pl';
+    $self->{uri_images}   = $self->{working_uri_root} . '/vftp/images';
+    $self->{uri_jump}     = $self->{working_uri_root} . '/vftp/functional/jump.pl';
+    $self->{uri_upload}   = $self->{working_uri_root} . '/vftp/functional/upload.pl';
 
     bless($self, $class);
     return $self;

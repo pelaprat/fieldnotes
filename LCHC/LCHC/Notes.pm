@@ -22,7 +22,31 @@ sub new {
     my $root  = shift;
     my $self  = LCHC->new( $root );
 
-    $self->{admin_root}                   = 'http://fieldnotes.ucsd.edu/admin';
+    $self->{uri_css}           = $self->{uri_root} .         '/display/lchc.css';
+
+    ## Normal pages
+    $self->{uri_add}           = $self->{working_uri_root} . "/browse/add.pl";
+    $self->{uri_backup}        = $self->{working_uri_root} . "/admin/backup.pl";
+    $self->{uri_course}        = $self->{working_uri_root} . "/browse/course.pl";
+    $self->{uri_delete}        = $self->{working_uri_root} . "/functional/delete.pl";
+    $self->{uri_edit}          = $self->{working_uri_root} . "/browse/edit.pl";
+    $self->{uri_email}         = $self->{working_uri_root} . "/browse/email.pl";
+    $self->{uri_files}         = '/fieldnote_vftp/files/';
+    $self->{uri_index}         = $self->{working_uri_root} . "/index.pl";
+    $self->{uri_images}        = $self->{working_uri_root} . "/images";
+    $self->{uri_insert}        = $self->{working_uri_root} . "/functional/insert.pl";
+    $self->{uri_javascript}    = $self->{working_uri_root} . '/display/lchc.js';
+    $self->{uri_login}         = $self->{working_uri_root} . "/functional/login.pl";
+    $self->{uri_logout}        = $self->{working_uri_root} . "/functional/logout.pl";
+    $self->{uri_modify}        = $self->{working_uri_root} . "/browse/modify.pl";
+    $self->{uri_person}        = $self->{working_uri_root} . "/browse/person.pl";
+    $self->{uri_print}         = $self->{working_uri_root} . "/browse/print.pl";
+    $self->{uri_results}       = $self->{working_uri_root} . "/search/results.pl";
+    $self->{uri_search}        = $self->{working_uri_root} . "/search/search.pl";
+    $self->{uri_update}        = $self->{working_uri_root} . "/functional/update.pl";
+
+    ## Admin pages
+    $self->{admin_root}                   = $self->{working_uri_root}   . '/admin';
     $self->{admin_add}                    = $self->{admin_root} . "/add.pl";
     $self->{admin_item_count}             = $self->{admin_root} . "/synchronize/conference_item_count.pl";
     $self->{admin_backup}                 = $self->{admin_root} . "/backup.pl";
@@ -35,28 +59,8 @@ sub new {
     $self->{admin_stats}                  = $self->{admin_root} . "/statistics.pl";
     $self->{admin_update}                 = $self->{admin_root} . "/update.pl";
 
-    $self->{archives_index}               = 'http://fieldnotes.ucsd.edu/archives/index.pl';
-
-    $self->{uri_add}           = $self->{uri_root} . "/browse/add.pl";
-    $self->{uri_backup}        = $self->{uri_root} . "/admin/backup.pl";
-    $self->{uri_course}        = $self->{uri_root} . "/browse/course.pl";
-    $self->{uri_css}           = 'http://fieldnotes.ucsd.edu/display/lchc.css';
-    $self->{uri_delete}        = $self->{uri_root} . "/functional/delete.pl";
-    $self->{uri_edit}          = $self->{uri_root} . "/browse/edit.pl";
-    $self->{uri_email}         = $self->{uri_root} . "/browse/email.pl";
-    $self->{uri_files}         = '/fieldnote_vftp/files/';
-    $self->{uri_index}         = $self->{uri_root} . "/index.pl";
-    $self->{uri_images}        = $self->{uri_root} . "/images";
-    $self->{uri_insert}        = $self->{uri_root} . "/functional/insert.pl";
-    $self->{uri_javascript}    = 'http://fieldnotes.ucsd.edu/display/lchc.js';
-    $self->{uri_login}         = $self->{uri_root} . "/functional/login.pl";
-    $self->{uri_logout}        = $self->{uri_root} . "/functional/logout.pl";
-    $self->{uri_modify}        = $self->{uri_root} . "/browse/modify.pl";
-    $self->{uri_person}        = $self->{uri_root} . "/browse/person.pl";
-    $self->{uri_print}         = $self->{uri_root} . "/browse/print.pl";
-    $self->{uri_results}       = $self->{uri_root} . "/search/results.pl";
-    $self->{uri_search}        = $self->{uri_root} . "/search/search.pl";
-    $self->{uri_update}        = $self->{uri_root} . "/functional/update.pl";
+    ## Arhives pages
+    $self->{archives_index}               = $self->{working_uri_root} . '/archives/index.pl';
 
     bless($self, $class);
     return $self;
@@ -478,11 +482,11 @@ sub fieldnote_display($$$$$) {
 
 			if( $local->{name} =~ m/.(jpg|jpeg|gif|png)$/i ){
 				## use Lightbox only for images
-				print $cgi->a({ -href => "http://fieldnotes.ucsd.edu/vftp/functional/download.pl?id=$local->{file}", -rel => "lightbox" }, 
+				print $cgi->a({ -href => $self->{working_uri_root} . "vftp/functional/download.pl?id=$local->{file}", -rel => "lightbox" }, 
                 	          $local->{name} );
 			}
 			else{
-				print $cgi->a({ -href => "http://fieldnotes.ucsd.edu/vftp/functional/download.pl?id=$local->{file}"}, 
+				print $cgi->a({ -href => $self->{working_uri_root} . "vftp/functional/download.pl?id=$local->{file}"}, 
                  		      $local->{name} );
 			}
 
@@ -584,7 +588,7 @@ sub comment_display($$$) {
 
             foreach my $local ( @locals ) {
 		print $cgi->img({ -src => "$self->{uri_images}/file.jpg" });
-		print $cgi->a({ -href => "http://fieldnotes.ucsd.edu/vftp/functional/download.pl?id=$local->{file}" },
+		print $cgi->a({ -href => $self->{working_uri_root} . "vftp/functional/download.pl?id=$local->{file}" },
 			      $local->{name} );
 		print $cgi->br;
             }

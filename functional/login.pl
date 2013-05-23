@@ -70,11 +70,11 @@ if( $lchc->in( $user, @currents )) {
 
 if( $user >= 1 ) {
 
-    $cookie = $cgi->cookie(-name    => $lchc->{cookieName},
+    $cookie = $cgi->cookie(-name    => $lchc->{cookie_name_reg},
 			   -value   => $user,
 			   -expires => '+1y',
 			   -path    => '/',
-			   -domain  => '.fieldnotes.ucsd.edu',
+			   -domain  => $lchc->{cookie_domain},
 			   -secure  => 0);
 
     ######################

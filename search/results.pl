@@ -19,13 +19,13 @@ use LCHC::SQL::Notes;
 ## Build the basic objects
 my $cgi  = new CGI;
 my $db   = new LCHC::SQL::Notes;
-my $lchc = new LCHC::Notes( 'http://fieldnotes.ucsd.edu' );
+my $lchc = new LCHC::Notes;
 
 ## Restore parameters
 $cgi->restore_parameters();
 
 ## Retrieve parameter values
-my $user = $cgi->cookie($lchc->{cookieName});
+my $user = $cgi->cookie($lchc->{cookie_name_reg});
 
 my @quarters     = $cgi->param('quarters');
 my $person       = $cgi->param('person');
